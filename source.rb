@@ -1,4 +1,4 @@
-require_relative "item"
+require_relative 'item'
 
 class Source < Item
   def initialize(name)
@@ -11,5 +11,5 @@ class Source < Item
   def add_item(item)
     @items << item
     item.source = self
-end
+  end
 end

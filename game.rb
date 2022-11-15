@@ -3,5 +3,5 @@ class Game < Item
     super()
     @multiplayer = multiplayer
     @last_played = last_played
-  end 
+  end
 end

@@ -3,5 +3,5 @@ class Book < Item
     super()
     @publisher = publisher
     @cover_state = cover_state
-  end 
+  end
 end
