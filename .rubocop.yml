@@ -29,6 +29,8 @@ Style/AndOr:
   Enabled: false
 Style/DefWithParentheses:
   Enabled: false
+  Metrics/ParameterLists:
+  Enabled: false
 Style/FrozenStringLiteralComment:
   EnforcedStyle: never
 
