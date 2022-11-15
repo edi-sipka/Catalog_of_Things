@@ -16,5 +16,4 @@ module Request
       exit
     end
   end
-
 end
