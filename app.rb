@@ -20,14 +20,16 @@ class App
             list_all_labels
         when '6'
             list_all_authors
+        end
+    end
+    def extra_option(option)
+        case option
         when '7'
             add_book
         when '8'
             add_music_album
         when '9'
             add_game
-        else 
-            puts 'select a correct number'
     end
 end
 

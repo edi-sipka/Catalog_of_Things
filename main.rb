@@ -24,6 +24,7 @@ class Main
             option = gets.chomp
             break if option == '10'
             new_app.select_option(option)
+            new_app.extra_option(option)
         end 
     end
 end
