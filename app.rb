@@ -66,7 +66,7 @@ end
     end
 
     def list_all_authors
-        puts 'list all books'
+        puts 'list all authors'
     end
 
 end
