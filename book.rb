@@ -1,3 +1,4 @@
+require './item'
 class Book < Item
   def initialize(publisher, cover_state)
     super()
