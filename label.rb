@@ -1,7 +1,7 @@
-require_relative "item"
+require_relative 'item'
 
 class Label < Item
-  def initialize(title,color)
+  def initialize(title, color)
     super()
     @id = Random.rand(1..1000)
     @title = title
@@ -12,5 +12,5 @@ class Label < Item
   def add_item(item)
     @items << item
     item.label = self
-end
+  end
 end
