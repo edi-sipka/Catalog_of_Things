@@ -29,6 +29,7 @@ class App
         else 
             puts 'select a correct number'
     end
+end
 
     def add_book
         puts 'add your books'

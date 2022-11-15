@@ -1,4 +1,3 @@
-# require './request'
 require './app'
 
 puts 'Welcome to the catalog app'
@@ -25,14 +24,15 @@ class Main
             option = gets.chomp
             break if option == '10'
             new_app.select_option(option)
-        end
-    end 
+        end 
+    end
 end
 def main 
     app = Main.new
     app.start
 end
 main
+
 
 
 #   include Request
