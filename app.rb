@@ -18,6 +18,7 @@ class App
     when '5'
       list_all_labels
     when '6'
+      list_all_authors
     end
   end
 

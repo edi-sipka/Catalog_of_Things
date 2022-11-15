@@ -1,4 +1,4 @@
-class Label 
+class Label
   attr_reader :id
   attr_accessor :title, :color, :items
 
