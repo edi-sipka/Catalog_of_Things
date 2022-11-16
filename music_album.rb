@@ -10,4 +10,8 @@ class MusicAlbum < Item
     @published_date = published_date
     @genre = genre
   end
+
+  def can_be_archived?
+    super && on_spotify == true
+  end
 end
