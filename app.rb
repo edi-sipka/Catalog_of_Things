@@ -68,8 +68,4 @@ class App
   def list_all_labels
     puts 'list all labels'
   end
-
-  def list_all_authors
-    puts 'list all books'
-  end
 end
