@@ -1,3 +1,5 @@
+require 'date'
+
 class Item
   def initialize(genre, author, source, label, publish_date)
     @id = Random.rand(1..1000)
@@ -10,11 +12,13 @@ class Item
   end
 
   def can_be_archived?
-    publish_year = @publish_date.strftime('%Y')
-    true if publish_year > publish_year - 10
+    published_year = Date.strptime(@published_date, '%d-%m-%Y').strftime('%Y')
+    Time.now.year - published_year.to_i > 10
   end
 
-  def move_to_archive
-    true if can_be_archived? == true
+  private :can_be_archived?
+
+  def move_to_archived?
+    can_be_archived? == true
   end
 end

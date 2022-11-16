@@ -1,6 +1,17 @@
+require_relative 'genre'
+require_relative 'item'
+
 class MusicAlbum < Item
-  def initialize(on_spotify)
-    super()
+  attr_reader :on_spotify, :publish_date, :genre
+
+  def initialize(on_spotify:, publish_date:, genre:)
+    super(publish_date: publish_date)
     @on_spotify = on_spotify
+    @published_date = published_date
+    @genre = genre
+  end
+
+  def can_be_archived?
+    super && on_spotify == true
   end
 end
