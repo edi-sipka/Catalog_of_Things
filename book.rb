@@ -10,4 +10,8 @@ attr_reader :publisher, :publish_date, :label, :cover_state
     @cover_state = cover_state
     @label = label
   end
+
+  def can_be_archived? 
+    super || @cover_state == "bad"
+  end
 end
