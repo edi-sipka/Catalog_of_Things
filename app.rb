@@ -6,14 +6,11 @@ require './label'
 require './genre'
 require 'json'
 
-
 class App
-
   def select_option(option)
-   
     case option
     when '1'
-    list_all_books
+      list_all_books
     when '2'
       list_all_music_albums
     when '3'
@@ -38,36 +35,35 @@ class App
     end
   end
 
-
   def add_book
-        puts 'Add publisher:'
-        publisher = gets.chomp
-        puts 'Add cover state (Good or bad):'
-        cover_state = gets.chomp
-        puts "Add publish date:"
-        publish_date = gets.chomp
-        book = Book.new(publisher, cover_state,  publish_date)
-        add_label(book)
-        puts 'Book created successfully'
-        store_book(book)
+    puts 'Add publisher:'
+    publisher = gets.chomp
+    puts 'Add cover state (Good or bad):'
+    cover_state = gets.chomp
+    puts 'Add publish date:'
+    publish_date = gets.chomp
+    book = Book.new(publisher, cover_state, publish_date)
+    add_label(book)
+    puts 'Book created successfully'
+    store_book(book)
   end
 
   def store_book(book)
     obj = {
-        id:book.id,
-        publisher: book.publisher,
-        archived: book.archived,
-        label: book.label,
-        cover_state: book.cover_state,
-        publish_date:book.publish_date
+      id: book.id,
+      publisher: book.publisher,
+      archived: book.archived,
+      label: book.label,
+      cover_state: book.cover_state,
+      publish_date: book.publish_date
     }
 
-    stored_book = File.size("./books.json").zero? ? [] : JSON.parse(File.read("./books.json")) 
+    stored_book = File.size('./books.json').zero? ? [] : JSON.parse(File.read('./books.json'))
     stored_book << obj
-    File.write("books.json", stored_book.to_json)
-end
+    File.write('books.json', stored_book.to_json)
+  end
 
-def add_label(item)
+  def add_label(item)
     puts 'Add title'
     title = gets.chomp
     puts 'Add color'
@@ -76,9 +72,9 @@ def add_label(item)
     label.add_item(item)
     puts 'Label created successfully'
     store_label(label)
-end
+  end
 
-def add_author(item)
+  def add_author(item)
     puts 'Enter first name'
     first_name = gets.chomp
     puts 'Enter last name'
@@ -88,22 +84,21 @@ def add_author(item)
     new_author.add_item(item)
     puts 'author created successfully'
     store_author(new_author)
-end
+  end
 
-def store_label(label)
+  def store_label(label)
     obj = {
-        id:label.id,
-        title: label.title,
-        color: label.color
+      id: label.id,
+      title: label.title,
+      color: label.color
     }
 
-    stored_label = File.size("./labels.json").zero? ?  [] : JSON.parse(File.read("./labels.json")) 
+    stored_label = File.size('./labels.json').zero? ? [] : JSON.parse(File.read('./labels.json'))
     stored_label << obj
-    File.write("labels.json", stored_label.to_json)
-end
+    File.write('labels.json', stored_label.to_json)
+  end
 
-
-def add_game
+  def add_game
     print 'Is it multiplayer [Y / N]'
     multiplayer = gets.chomp.downcase == 'y'
     print 'Last played date, use  (YYYY-MM-DD) format: '
@@ -127,15 +122,14 @@ def add_game
     }
 
     if File.exist?('./games.json')
-        file = File.size('./games.json').zero? ? [] : JSON.parse(File.read('./games.json'))
-        file << hash
-        File.write('games.json', file.to_json)
-      else
-        File.write('./games.json3', [])
-        File.write('./author.json', [])
-      end
+      file = File.size('./games.json').zero? ? [] : JSON.parse(File.read('./games.json'))
+      file << hash
+      File.write('games.json', file.to_json)
+    else
+      File.write('./games.json3', [])
+      File.write('./author.json', [])
+    end
   end
-
 
   def store_author(new_author)
     hash = {
@@ -145,18 +139,18 @@ def add_game
     }
 
     if File.exist?('./author.json')
-        file = File.size('./author.json').zero? ? [] : JSON.parse(File.read('./author.json'))
-        file << hash
-        File.write('author.json', file.to_json)
-      else
-        File.write('./author.json', [])
-      end
+      file = File.size('./author.json').zero? ? [] : JSON.parse(File.read('./author.json'))
+      file << hash
+      File.write('author.json', file.to_json)
+    else
+      File.write('./author.json', [])
+    end
   end
 
   def list_all_games
     games = File.size('./games.json').zero? ? [] : JSON.parse(File.read('./games.json'))
     games.each do |g|
-      puts "Multiplayer: #{g['multiplayer']} , Last Played At Date: #{g['last_played']}  , Author: #{g['author_name']} ,"
+      puts "Multiplayer: #{g['multiplayer']} , Last Played At Date: #{g['last_played']}"
     end
   end
 
@@ -165,9 +159,9 @@ def add_game
   end
 
   def list_all_books
-    books = File.size("./books.json").zero? ? [] : JSON.parse(File.read("./books.json"))
+    books = File.size('./books.json').zero? ? [] : JSON.parse(File.read('./books.json'))
     books.each do |book|
-      puts "Publisher: #{book["publisher"]}, Cover State: #{book["cover_state"]}, Publish Date: #{book["publish_date"]}"
+      puts "Publisher: #{book['publisher']}, Cover State: #{book['cover_state']}, Publish Date: #{book['publish_date']}"
     end
   end
 
@@ -187,9 +181,9 @@ def add_game
   end
 
   def list_all_labels
-    labels = File.size("./labels.json").zero? ? [] : JSON.parse(File.read("./labels.json"))
+    labels = File.size('./labels.json').zero? ? [] : JSON.parse(File.read('./labels.json'))
     labels.each do |label|
-      puts "Title: #{label["title"]}, Color: #{label["color"]}"
+      puts "Title: #{label['title']}, Color: #{label['color']}"
     end
   end
 end

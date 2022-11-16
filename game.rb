@@ -7,7 +7,7 @@ class Game < Item
     super(publish_date)
     @multiplayer = multiplayer
     @last_played = last_played
-  end 
+  end
 
   def can_be_archived?
     true if super && (Date.today.to_time.year - @last_played.year) > 2
