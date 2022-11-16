@@ -11,4 +11,3 @@ class Game < Item
     @author = author
   end
 end
-
