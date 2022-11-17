@@ -154,10 +154,6 @@ class App
     end
   end
 
-  def add_music_album
-    puts 'add your music album'
-  end
-
   def list_all_books
     books = File.size('./books.json').zero? ? [] : JSON.parse(File.read('./books.json'))
     books.each do |book|
@@ -166,11 +162,17 @@ class App
   end
 
   def list_all_music_albums
-    puts 'list all music albums'
+    music_album = File.size('./music_album.json').zero? ? [] : JSON.parse(File.read('./music_album.json'))
+    music_album.each do |music|
+      puts "Spotify: #{music['on_spotify']}, Publish Date: #{music['publish_date']}, Genre Name: #{music['name']}"
+    end
   end
 
   def list_all_genre
-    puts 'list all genre'
+    genre = File.size('./genre.json').zero? ? [] : JSON.parse(File.read('./genre.json'))
+    genre.each do |genres|
+      puts "Name: #{genres['name']}"
+    end
   end
 
   def list_all_authors
@@ -185,5 +187,49 @@ class App
     labels.each do |label|
       puts "Title: #{label['title']}, Color: #{label['color']}"
     end
+  end
+
+  def add_music_album
+    puts 'Add spotify(Yes or No):'
+    on_spotify = gets.chomp
+    puts 'Add publish date:'
+    publish_date = gets.chomp
+    music_album = MusicAlbum.new(on_spotify, publish_date)
+    add_genre(music_album)
+    puts 'Music Album created successfully'
+    store_music_album(music_album)
+  end
+
+  def store_music_album(music_album)
+    obj = {
+      id: music_album.id,
+      on_spotify: music_album.on_spotify,
+      publish_date: music_album.publish_date,
+      name: music_album.genre.name
+    }
+
+    stored_music_album = File.size('./music_album.json').zero? ? [] : JSON.parse(File.read('./music_album.json'))
+    stored_music_album << obj
+    File.write('music_album.json', stored_music_album.to_json)
+  end
+
+  def add_genre(item)
+    puts 'Add Name'
+    name = gets.chomp
+    genre = Genre.new(name)
+    genre.add_item(item)
+    puts 'Genre created successfully'
+    store_genre(genre)
+  end
+
+  def store_genre(genre)
+    obj = {
+      id: genre.id,
+      name: genre.name
+    }
+
+    stored_genre = File.size('./genre.json').zero? ? [] : JSON.parse(File.read('./genre.json'))
+    stored_genre << obj
+    File.write('genre.json', stored_genre.to_json)
   end
 end
