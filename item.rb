@@ -25,9 +25,14 @@ class Item
     label.extra_option << self unless label.items.include? self
     @label = label
   end
-
+  
   def add_genre(genre)
     genre.extra_option << self unless genre.items.include? self
     @genre = genre
+  end
+  
+  def add_author(author)
+    author.extra_option << self unless author.items.include? self
+    @author = author
   end
 end

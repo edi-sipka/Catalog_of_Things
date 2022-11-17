@@ -74,6 +74,18 @@ class App
     store_label(label)
   end
 
+  def add_author(item)
+    puts 'Enter first name'
+    first_name = gets.chomp
+    puts 'Enter last name'
+    last_name = gets.chomp
+    new_author = Author.new(first_name, last_name)
+    puts 'now going to authors.rb'
+    new_author.add_item(item)
+    puts 'author created successfully'
+    store_author(new_author)
+  end
+  
   def store_label(label)
     obj = {
       id: label.id,
@@ -87,7 +99,59 @@ class App
   end
 
   def add_game
-    puts 'add your game'
+    print 'Is it multiplayer [Y / N]'
+    multiplayer = gets.chomp.downcase == 'y'
+    print 'Last played date, use  (YYYY-MM-DD) format: '
+    last_played_at_date = gets.chomp
+    print 'publish_date use  (YYYY-MM-DD) format: '
+    publish_date = gets.chomp
+    new_game = Game.new(multiplayer, last_played_at_date, publish_date)
+    add_author(new_game)
+    puts 'Game and Author were added successfully!'
+    store_game(new_game)
+  end
+
+  def store_game(new_game)
+    hash = {
+      id: new_game.id,
+      multiplayer: new_game.multiplayer,
+      archived: new_game.archived,
+      author_name: new_game.author.first_name,
+      last_played: new_game.last_played,
+      publish_date: new_game.publish_date
+    }
+
+    if File.exist?('./games.json')
+      file = File.size('./games.json').zero? ? [] : JSON.parse(File.read('./games.json'))
+      file << hash
+      File.write('games.json', file.to_json)
+    else
+      File.write('./games.json3', [])
+      File.write('./author.json', [])
+    end
+  end
+
+  def store_author(new_author)
+    hash = {
+      id: new_author.id,
+      first_name: new_author.first_name,
+      last_name: new_author.last_name
+    }
+
+    if File.exist?('./author.json')
+      file = File.size('./author.json').zero? ? [] : JSON.parse(File.read('./author.json'))
+      file << hash
+      File.write('author.json', file.to_json)
+    else
+      File.write('./author.json', [])
+    end
+  end
+
+  def list_all_games
+    games = File.size('./games.json').zero? ? [] : JSON.parse(File.read('./games.json'))
+    games.each do |g|
+      puts "Multiplayer: #{g['multiplayer']} , Last Played At Date: #{g['last_played']}"
+    end
   end
 
   def list_all_books
@@ -95,10 +159,6 @@ class App
     books.each do |book|
       puts "Publisher: #{book['publisher']}, Cover State: #{book['cover_state']}, Publish Date: #{book['publish_date']}"
     end
-  end
-
-  def list_all_games
-    puts 'list all games'
   end
 
   def list_all_music_albums
@@ -116,7 +176,10 @@ class App
   end
 
   def list_all_authors
-    puts 'list all authors'
+    authors = File.size('./author.json').zero? ? [] : JSON.parse(File.read('./author.json'))
+    authors.each do |a|
+      puts "First Name: #{a['first_name']} , Last Name: #{a['last_name']}"
+    end
   end
 
   def list_all_labels
