@@ -33,5 +33,9 @@ end
 def main
   app = Main.new
   app.start
+  return if File.exist?('./games.json')
+
+  File.write('./games.json3', [])
+  File.write('./author.json', [])
 end
 main
