@@ -85,7 +85,7 @@ class App
     puts 'author created successfully'
     store_author(new_author)
   end
-  
+
   def store_label(label)
     obj = {
       id: label.id,
