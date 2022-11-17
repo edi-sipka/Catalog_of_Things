@@ -35,3 +35,16 @@ CREATE TABLE item (
  FOREIGN KEY(label_id) REFERENCES label(id), 
 );
 
+CREATE TABLE games (
+  id SERIAL PRIMARY KEY,
+  multiplayer BOOLEAN,
+  last_played_at DATE,
+  publish_date DATE,
+
+);
+
+CREATE TABLE author (
+  id SERIAL PRIMARY KEY,
+  first_name VARCHAR(50),
+  last_name VARCHAR(50)
+);
