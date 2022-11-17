@@ -1,4 +1,5 @@
 require_relative 'item'
+require 'date'
 
 class Game < Item
   attr_reader :multiplayer, :last_played, :author, :publish_date
