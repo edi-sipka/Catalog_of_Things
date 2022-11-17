@@ -61,11 +61,11 @@ class App
     puts 'list all genre'
   end
 
+    def list_all_authors
+        puts 'list all authors'
+    end
+
   def list_all_labels
     puts 'list all labels'
-  end
-
-  def list_all_authors
-    puts 'list all books'
   end
 end
